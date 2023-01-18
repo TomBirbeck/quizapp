@@ -6,15 +6,10 @@ const quizCategory = document.querySelector('.categories')
 
 let score = 0
 let total = 0
+let cat = ''
 
-const handleCategory = (e) => {
-    return e.target.value
-}
-
-quizCategory.addEventListener('change', handleCategory)
-
-const questions = async () => {
-    const res = await fetch(`https://the-trivia-api.com/api/questions?limit=1&categories=science`, {
+const questions = async (cat) => {
+    const res = await fetch(`https://the-trivia-api.com/api/questions?limit=1&categories=${cat}`, {
    headers: {
      'Content-Type': 'application/json'
    },
@@ -26,16 +21,12 @@ const questions = async () => {
  return data
 }
 
-questions()
-
-// take in 1 correct answer and 3 incorrect
-// jumble them and assign them to buttons
-
-
-
+// takes in the answers, mixes them and creates buttons for all choices 
 const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) => {
     let answers = [correctAnswer, incorrectOne, incorrectTwo, incorrectThree];
     const mixed = [];
+
+    // checks selected answer against correct one and disables all buttons when an answer is chosen
     const checkAnswer = (e) => {
         const buttons = document.querySelectorAll('.button')
         console.log(buttons)
@@ -73,11 +64,26 @@ mixed.map(answer => {
 })
 }
 
+//sets category and starts quiz
+const handleCategory = (e) => {
+    while (options.firstChild) {
+        options.removeChild(options.firstChild);
+    }
+    score = 0
+    cat = e.target.value
+    questions(cat)
+}
+
+console.log(cat)
+
+quizCategory.addEventListener('change', handleCategory)
+
+//removes all buttons, updates score and recalls questions for new quiz question
 const nextQuestion = () => {
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
-    questions()
+    questions(cat)
     scoreBoard.textContent = 'Score:' + score
 }
 
