@@ -3,9 +3,11 @@ const question = document.querySelector('.questionText')
 const options = document.querySelector('.options') 
 const next = document.querySelector('.nextQuestion')
 const quizCategory = document.querySelector('.categories')
+const quizLength = document.querySelector('.quizLength')
 
 let score = 0
 let total = 0
+let questionAmount = 0
 let cat = ''
 
 const questions = async (cat) => {
@@ -81,16 +83,24 @@ const handleCategory = (e) => {
 
 quizCategory.addEventListener('change', handleCategory)
 
+//sets quiz length
+const handleQuizLength = (e) => {
+    questionAmount = e.target.value
+    return
+}
+
+quizLength.addEventListener('change', handleQuizLength)
+
 //removes all buttons, updates score and recalls questions for new quiz question
 const nextQuestion = () => {
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
-    if (total < 10){
+    if (total < questionAmount){
         questions(cat)
-        scoreBoard.textContent = 'Score:' + score
-    } else if (total === 10) {
-        question.textContent = 'Your score is ' + score + ' out of ' + total
+        scoreBoard.textContent = 'Score: ' + score
+    } else if (total === questionAmount) {
+        question.textContent = 'Well done! You scored ' + score + ' out of ' + total
     }
 }
 

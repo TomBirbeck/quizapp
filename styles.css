@@ -26,12 +26,16 @@ body {
     font-size: 1.1rem;
 }
 
+.quizLength {
+    width: 20vw;
+    font-size: 1.1rem;
+}
+
 .questionArea{
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 3rem;
-    background-color: aqua;
     height: 60vh;
 }
 
