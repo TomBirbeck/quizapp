@@ -2,7 +2,10 @@ const answerOne = document.querySelector('.answerButtonOne')
 const answerTwo = document.querySelector('.answerButtonTwo')
 const answerThree = document.querySelector('.answerButtonThree')
 const answerFour = document.querySelector('.answerButtonFour')
+const next = document.querySelector('.nextQuestion')
 const question = document.querySelector('.questionText')
+
+let score = 0
 
 const questions = async () => {
     const res = await fetch('https://the-trivia-api.com/api/questions?limit=1&categories=science,history', {
@@ -12,10 +15,13 @@ const questions = async () => {
  })
  const data  = await res.json()
  question.textContent = data[0].question
+ quiz(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
  answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
+ 
  return data
- }
+}
 
+questions()
 
 // take in 1 correct answer and 3 incorrect
 // jumble them and assign them to buttons
@@ -37,13 +43,18 @@ answerOne.textContent = mixed[0];
 answerTwo.textContent = mixed[1];       
 answerThree.textContent = mixed[2];      
 answerFour.textContent = mixed[3];     
+}
+
+const quiz = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) => {
 
 const checkAnswer = (e) => {
     if (e.target.textContent === correctAnswer){
-        console.log(true)
+        e.target.classList.add("correct");
+        score++
+        console.log(score)
         return true
-    } else {
-        console.log(false)
+    } else if (e.target.textContent !== correctAnswer) {
+        e.target.classList.add("incorrect");
         return false
     }
 }
@@ -54,8 +65,17 @@ answerThree.addEventListener('click', checkAnswer)
 answerFour.addEventListener('click', checkAnswer)
 };
 
+const nextQuestion = () => {
+    answerOne.classList.remove("correct")
+    answerTwo.classList.remove("correct")
+    answerThree.classList.remove("correct")
+    answerFour.classList.remove("correct")
+    answerOne.classList.remove("incorrect")
+    answerTwo.classList.remove("incorrect")
+    answerThree.classList.remove("incorrect")
+    answerFour.classList.remove("incorrect")
+    
+    questions()
+}
 
-
-
-
-questions()
+next.addEventListener('click', nextQuestion)

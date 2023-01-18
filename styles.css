@@ -11,10 +11,10 @@ body {
     text-align: center;
 }
 
-.answerButton {
-    color: blue;
+.correct {
+    background-color: green;
 }
 
-.answerButtonTwo {
-    background-color: aqua;
+.incorrect {
+    background-color: red;
 }
