@@ -1,23 +1,28 @@
-const answerOne = document.querySelector('.answerButtonOne')
-const answerTwo = document.querySelector('.answerButtonTwo')
-const answerThree = document.querySelector('.answerButtonThree')
-const answerFour = document.querySelector('.answerButtonFour')
-const next = document.querySelector('.nextQuestion')
+const scoreBoard = document.querySelector('.score')
 const question = document.querySelector('.questionText')
+const options = document.querySelector('.options') 
+const next = document.querySelector('.nextQuestion')
+const quizCategory = document.querySelector('.categories')
 
 let score = 0
+let total = 0
+
+const handleCategory = (e) => {
+    return e.target.value
+}
+
+quizCategory.addEventListener('change', handleCategory)
 
 const questions = async () => {
-    const res = await fetch('https://the-trivia-api.com/api/questions?limit=1&categories=science,history', {
+    const res = await fetch(`https://the-trivia-api.com/api/questions?limit=1&categories=science`, {
    headers: {
      'Content-Type': 'application/json'
    },
  })
  const data  = await res.json()
  question.textContent = data[0].question
- quiz(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
  answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
- 
+ total++
  return data
 }
 
@@ -26,9 +31,22 @@ questions()
 // take in 1 correct answer and 3 incorrect
 // jumble them and assign them to buttons
 
+
+
 const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) => {
     let answers = [correctAnswer, incorrectOne, incorrectTwo, incorrectThree];
     const mixed = [];
+    const checkAnswer = (e) => {
+        if (e.target.textContent === correctAnswer){
+            e.target.classList.add("correct");
+            score++
+            console.log(score)
+            return true
+        } else if (e.target.textContent !== correctAnswer) {
+            e.target.classList.add("incorrect");
+            return false
+        }
+    }
     do {
         for (let i = 0; i < answers.length; i++) {
             const number = Math.floor(Math.random() * 4);
@@ -38,44 +56,22 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
         }
 } while (mixed.length < 4);
 
+mixed.map(answer => {
+    let button = document.createElement("button");
+    button.value = button.name = button.textContent = answer;
+    button.addEventListener("click", checkAnswer);
+            options.appendChild(button);
 
-answerOne.textContent = mixed[0];
-answerTwo.textContent = mixed[1];       
-answerThree.textContent = mixed[2];      
-answerFour.textContent = mixed[3];     
+})
 }
-
-const quiz = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) => {
-
-const checkAnswer = (e) => {
-    if (e.target.textContent === correctAnswer){
-        e.target.classList.add("correct");
-        score++
-        console.log(score)
-        return true
-    } else if (e.target.textContent !== correctAnswer) {
-        e.target.classList.add("incorrect");
-        return false
-    }
-}
-
-answerOne.addEventListener('click', checkAnswer)
-answerTwo.addEventListener('click', checkAnswer)
-answerThree.addEventListener('click', checkAnswer)
-answerFour.addEventListener('click', checkAnswer)
-};
 
 const nextQuestion = () => {
-    answerOne.classList.remove("correct")
-    answerTwo.classList.remove("correct")
-    answerThree.classList.remove("correct")
-    answerFour.classList.remove("correct")
-    answerOne.classList.remove("incorrect")
-    answerTwo.classList.remove("incorrect")
-    answerThree.classList.remove("incorrect")
-    answerFour.classList.remove("incorrect")
     
+    while (options.firstChild) {
+        options.removeChild(options.firstChild);
+    }
     questions()
+    scoreBoard.textContent = 'Score:' + score
 }
 
 next.addEventListener('click', nextQuestion)
