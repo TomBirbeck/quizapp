@@ -37,13 +37,20 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
     let answers = [correctAnswer, incorrectOne, incorrectTwo, incorrectThree];
     const mixed = [];
     const checkAnswer = (e) => {
+        const buttons = document.querySelectorAll('.button')
+        console.log(buttons)
         if (e.target.textContent === correctAnswer){
             e.target.classList.add("correct");
             score++
-            console.log(score)
+            for(let i = 0; i < buttons.length; i++){
+                buttons[i].setAttribute('disabled', '')
+            }
             return true
         } else if (e.target.textContent !== correctAnswer) {
             e.target.classList.add("incorrect");
+            for(let i = 0; i < buttons.length; i++){
+                buttons[i].setAttribute('disabled', '')
+            }
             return false
         }
     }
@@ -59,6 +66,7 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
 mixed.map(answer => {
     let button = document.createElement("button");
     button.value = button.name = button.textContent = answer;
+    button.classList.add('button')
     button.addEventListener("click", checkAnswer);
             options.appendChild(button);
 
@@ -66,7 +74,6 @@ mixed.map(answer => {
 }
 
 const nextQuestion = () => {
-    
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
