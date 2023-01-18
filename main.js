@@ -18,6 +18,7 @@ const questions = async (cat) => {
  question.textContent = data[0].question
  answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
  total++
+ console.log(total)
  return data
 }
 
@@ -29,7 +30,6 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
     // checks selected answer against correct one and disables all buttons when an answer is chosen
     const checkAnswer = (e) => {
         const buttons = document.querySelectorAll('.button')
-        console.log(buttons)
         if (e.target.textContent === correctAnswer){
             e.target.classList.add("correct");
             score++
@@ -41,6 +41,9 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
             e.target.classList.add("incorrect");
             for(let i = 0; i < buttons.length; i++){
                 buttons[i].setAttribute('disabled', '')
+                if (buttons[i].value === correctAnswer) {
+                    buttons[i].classList.add("correct")
+                }
             }
             return false
         }
@@ -70,11 +73,11 @@ const handleCategory = (e) => {
         options.removeChild(options.firstChild);
     }
     score = 0
+    total = 0
+    scoreBoard.textContent = 'Score:' + score
     cat = e.target.value
     questions(cat)
 }
-
-console.log(cat)
 
 quizCategory.addEventListener('change', handleCategory)
 
@@ -83,8 +86,12 @@ const nextQuestion = () => {
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
-    questions(cat)
-    scoreBoard.textContent = 'Score:' + score
+    if (total < 10){
+        questions(cat)
+        scoreBoard.textContent = 'Score:' + score
+    } else if (total === 10) {
+        question.textContent = 'Your score is ' + score + ' out of ' + total
+    }
 }
 
 next.addEventListener('click', nextQuestion)

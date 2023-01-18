@@ -7,8 +7,65 @@ body {
     padding: 0;
 }
 
+.topSection {
+    display: grid;
+    grid-template-areas: "header header score";
+}
+
+.score {
+    grid-area: score;
+}
+
 .header {
     text-align: center;
+    grid-area: header;
+}
+
+.categories {
+    width: 20vw;
+    font-size: 1.1rem;
+}
+
+.questionArea{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    background-color: aqua;
+    height: 60vh;
+}
+
+.questionText {
+    width: 90vw;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-width: 50vw
+}
+
+.button{
+    padding: 0.5rem;
+    min-width: 5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 1rem;
+}
+
+.button :hover{
+    scale: 1.1;
+    background-color: blueviolet;
+}
+
+.nextQuestion{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 1rem;
 }
 
 .correct {

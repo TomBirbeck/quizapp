@@ -8,25 +8,25 @@
     <title>Quiz App</title>
 </head>
 <body>
-    <section>
+    <section class="topSection">
         <h1 class="header">Quiz App</h1>
         <h2 class="score">Score: 0</h2>
-        <select class="categories">
-            <option value="">Select Category</option>
-            <option value="general_knowledge">General Knowledge</option>
-            <option value="history">History</option>
-            <option value="geography">Geography</option>
-            <option value="science">Science</option>
-            <option value="movies">Movies</option>
-            <option value="music">Music</option>
-            <option value="sports">Sport</option>
-        </select>
     </section>
-    <section>
-        <p class="questionText">Question here</p>
+    <select class="categories">
+        <option value="">Select Category</option>
+        <option value="general_knowledge">General Knowledge</option>
+        <option value="history">History</option>
+        <option value="geography">Geography</option>
+        <option value="science">Science</option>
+        <option value="movies">Movies</option>
+        <option value="music">Music</option>
+        <option value="sports">Sport</option>
+    </select>
+    <section class="questionArea">
+        <p class="questionText">Welcome to the quiz, please select a category to begin!</p>
         <div class="options"></div>
+        <button class="nextQuestion" >Next Question</button>
     </section>
-    <button class="nextQuestion" >Next Question</button>
     
     <script src="main.js"></script>
 </body>
