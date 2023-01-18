@@ -8,31 +8,29 @@ const question = document.querySelector('.questionText')
 // jumble them and assign them to buttons
 
 const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) => {
-    let answers = [correctAnswer, incorrectOne, incorrectTwo, incorrectThree]
-    const mixed = []
+    let answers = [correctAnswer, incorrectOne, incorrectTwo, incorrectThree];
+    const mixed = [];
     do {
         for (let i = 0; i < answers.length; i++) {
-            const number = Math.floor(Math.random() * 4)
+            const number = Math.floor(Math.random() * 4);
             if (!mixed.includes(answers[number])){
-                mixed.push(answers[number])
-                console.log("pushed", answers[number])
+                mixed.push(answers[number]);
             }
         }
-} while (mixed.length < 4)
+} while (mixed.length < 4);
 
 
-answerOne.textContent = correctAnswer    
-answerOne.nodeValue = correctAnswer    
-answerTwo.textContent = incorrectOne    
-answerTwo.nodeValue = incorrectOne    
-answerThree.textContent = incorrectTwo   
-answerThree.nodeValue = incorrectTwo   
-answerFour.textContent = incorrectThree    
-answerFour.nodeValue = incorrectThree    
+answerOne.textContent = mixed[0];   
+answerOne.nodeValue = mixed[0];    
+answerTwo.textContent = mixed[1];    
+answerTwo.nodeValue = mixed[1];     
+answerThree.textContent = mixed[2];    
+answerThree.nodeValue = mixed[2];    
+answerFour.textContent = mixed[3];   
+answerFour.nodeValue = mixed[3];    
 
-}
+};
 
-answerMixer(1,2,3,4)
 
 const questions = async () => {
    const res = await fetch('https://the-trivia-api.com/api/questions?limit=1&categories=science,history', {
@@ -40,14 +38,11 @@ const questions = async () => {
     'Content-Type': 'application/json'
   },
 })
-
 const data  = await res.json()
+question.textContent = data[0].question
+answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
 return data
 
 }
 
-// const res = await questions()
-// console.log(res)
-
-// question.textContent = questions().data.correctAnswer
-// answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2])
+questions()
