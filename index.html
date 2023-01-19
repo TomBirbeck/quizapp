@@ -12,7 +12,7 @@
         <h1 class="header">Quiz App</h1>
         <h2 class="score">Score: 0</h2>
     </section>
-    <section>
+    <section class="quizOptions">
         <select class="quizLength">
             <option value=0>Select quiz length</option>
             <option value=10>10</option>
@@ -30,11 +30,17 @@
             <option value="sports">Sport</option>
         </select>
     </section>
-    <section class="questionArea">
-        <p class="questionText">Welcome to the quiz, please select a category to begin!</p>
-        <div class="options"></div>
-        <button class="nextQuestion" >Next Question</button>
+    <section class="questionContainer">
+        <div class="questionArea">
+            <p class="questionText">Welcome to the quiz, please select a quiz length & category to begin!</p>
+            <div class="options"></div>
+            <button class="nextQuestion" >Next Question</button>
+        </div>
     </section>
+    <footer class="footer">
+        <p>App created by Tom Birbeck - 2023</p>
+        <p>Questions sourced from the-trivia-api.com</p>
+    </footer>
     
     <script src="main.js"></script>
 </body>

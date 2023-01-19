@@ -1,10 +1,14 @@
 * {
     box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
+    background-color: #475569;
+    /* background-color: black;
+    color: red; */
 }
 
 .topSection {
@@ -14,33 +18,58 @@ body {
 
 .score {
     grid-area: score;
+    color:white;
+    text-align: right;
+    padding-right: 1rem;
 }
 
 .header {
-    text-align: center;
     grid-area: header;
+    font-size: 2.5rem;
+    text-align: center;
+    color: #fbbf24;
+    text-decoration: underline;
+}
+
+.quizOptions {
+    display: grid;
+    grid-template-areas: '' 'categories' 'length' '';
+    place-items: center;
 }
 
 .categories {
-    width: 20vw;
+    grid-area: 'categories';
+    width: 15vw;
     font-size: 1.1rem;
 }
 
 .quizLength {
-    width: 20vw;
+    grid-area: 'length';
+    width: 15vw;
     font-size: 1.1rem;
+}
+
+.questionContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .questionArea{
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
     gap: 3rem;
+    width: 80vw;
     height: 60vh;
+    background-color: #991b1b;
+    border: solid 5px #fbbf24;
+    border-radius: 1rem;
 }
 
 .questionText {
-    width: 90vw;
+    width: 100%;
     text-align: center;
     font-size: 1.8rem;
 }
@@ -55,6 +84,7 @@ body {
 .button{
     padding: 0.5rem;
     min-width: 5rem;
+    max-width: 25%;
     font-size: 1rem;
     border: 2px solid black;
     border-radius: 1rem;
@@ -70,6 +100,11 @@ body {
     font-size: 1rem;
     border: 2px solid black;
     border-radius: 1rem;
+}
+
+.footer {
+    text-align: center;
+    color: white;
 }
 
 .correct {

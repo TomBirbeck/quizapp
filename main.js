@@ -20,7 +20,6 @@ const questions = async (cat) => {
  question.textContent = data[0].question
  answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
  total++
- console.log(total)
  return data
 }
 
@@ -85,7 +84,7 @@ quizCategory.addEventListener('change', handleCategory)
 
 //sets quiz length
 const handleQuizLength = (e) => {
-    questionAmount = e.target.value
+    questionAmount = Number(e.target.value)
     return
 }
 
