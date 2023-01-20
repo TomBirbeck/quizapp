@@ -84,12 +84,6 @@ body {
 }
 
 .options {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    min-width: 50vw
-}
-.options {
     display: grid;
     grid-template-columns: 1fr 1fr;
     place-items: center;
@@ -99,7 +93,7 @@ body {
 .button{
     padding: 0.5rem;
     width: 80%;
-    height: max-content;
+    min-height: max-content;
     font-size: 1rem;
     border: 2px solid black;
     border-radius: 0.5rem;
@@ -154,7 +148,6 @@ body {
     .button {
         padding: 0.3rem;
         font-size: 0.8rem;
-        white-space: wrap;
     }
 }
 @media only screen and (max-width: 1000px) {
@@ -173,7 +166,6 @@ body {
     .button {
         padding: 0.3rem;
         font-size: 0.8rem;
-        white-space: wrap;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -202,7 +194,6 @@ body {
     .button {
         padding: 0.3rem;
         font-size: 0.8rem;
-        white-space: wrap;
     }
     .nextQuestion {
         padding: 0.3rem;
