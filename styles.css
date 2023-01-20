@@ -13,14 +13,20 @@ body {
 
 .topSection {
     display: grid;
-    grid-template-areas: "header header score";
+    grid-template-areas: "header header header header score high";
 }
 
 .score {
     grid-area: score;
     color:white;
     text-align: right;
-    padding-right: 1rem;
+}
+
+.highScore {
+    grid-area: high;
+    color:white;
+    text-align: right;
+    padding-right: 4rem;
 }
 
 .header {
@@ -97,6 +103,13 @@ body {
 }
 
 .nextQuestion{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+
+.endQuiz{
     padding: 0.5rem;
     font-size: 1rem;
     border: 2px solid black;

@@ -1,9 +1,13 @@
 const scoreBoard = document.querySelector('.score')
+const high = document.querySelector('.highScore')
 const question = document.querySelector('.questionText')
 const options = document.querySelector('.options') 
 const next = document.querySelector('.nextQuestion')
 const quizCategory = document.querySelector('.categories')
 const quizLength = document.querySelector('.quizLength')
+const end = document.querySelector('.endQuiz')
+
+high.textContent = 'High Score: ' + localStorage.getItem('High')
 
 let score = 0
 let total = 0
@@ -100,7 +104,21 @@ const nextQuestion = () => {
         scoreBoard.textContent = 'Score: ' + score
     } else if (total === questionAmount) {
         question.textContent = 'Well done! You scored ' + score + ' out of ' + total
+        next.classList.add('hidden')
+        end.classList.remove('hidden')
     }
 }
 
 next.addEventListener('click', nextQuestion)
+
+const endQuiz = () => {
+    if (score > localStorage.getItem('High')){
+        localStorage.setItem('High', score);
+        next.classList.remove('hidden')
+        end.classList.add('hidden')
+    }
+    next.classList.remove('hidden')
+    end.classList.add('hidden')
+}
+
+end.addEventListener('click', endQuiz)
