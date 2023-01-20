@@ -73,6 +73,7 @@ body {
     background-color: #991b1b;
     border: solid 5px #fbbf24;
     border-radius: 1rem;
+    padding: 0.5rem;
 }
 
 .questionText {
@@ -87,14 +88,21 @@ body {
     justify-content: space-between;
     min-width: 50vw
 }
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    min-width: 50vw
+}
 
 .button{
     padding: 0.5rem;
-    min-width: 5rem;
-    max-width: 25%;
+    width: 80%;
+    min-height: max-content;
     font-size: 1rem;
     border: 2px solid black;
     border-radius: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .button :hover{
@@ -140,6 +148,17 @@ body {
     .quizLength {
         width: 20vw;
     }
+    .questionArea {
+        width: 80vw;
+    }
+    .questionText {
+        font-size: 1rem;
+    }
+    .button {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+        white-space: wrap;
+    }
 }
 @media only screen and (max-width: 1000px) {
     .categories {
@@ -147,6 +166,17 @@ body {
     }
     .quizLength {
         width: 30vw;
+    }
+    .questionArea {
+        width: 80vw;
+    }
+    .questionText {
+        font-size: 1rem;
+    }
+    .button {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+        white-space: wrap;
     }
 }
 @media only screen and (max-width: 600px) {
@@ -164,20 +194,17 @@ body {
         font-size: 0.8rem;
     }
     .questionArea {
-        width: 90vw;
+        width: 80vw;
     }
     .questionText {
         font-size: 1rem;
     }
     .options {
-        justify-content: center;
-        /* gap: 1rem; */
+        grid-template-columns: 1fr;
     }
     .button {
-        min-width: 40%;
         padding: 0.3rem;
         font-size: 0.8rem;
-        min-height:max-content;
         white-space: wrap;
     }
     .nextQuestion {
