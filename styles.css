@@ -132,3 +132,60 @@ body {
 .hidden {
     display: none;
 }
+
+@media only screen and (max-width: 1200px) {
+    .categories {
+        min-width: 20vw;
+    }
+    .quizLength {
+        width: 20vw;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    .categories {
+        min-width: 30vw;
+    }
+    .quizLength {
+        width: 30vw;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .categories {
+        min-width: 50vw;
+    }
+    .quizLength {
+        width: 50vw;
+    }
+    .highScore {
+        font-size: 0.8rem;
+        padding-right: 0.5rem;
+    }
+    .score {
+        font-size: 0.8rem;
+    }
+    .questionArea {
+        width: 90vw;
+    }
+    .questionText {
+        font-size: 1rem;
+    }
+    .options {
+        justify-content: center;
+        /* gap: 1rem; */
+    }
+    .button {
+        min-width: 40%;
+        padding: 0.3rem;
+        font-size: 0.8rem;
+        min-height:max-content;
+        white-space: wrap;
+    }
+    .nextQuestion {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+    .endQuiz {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+}

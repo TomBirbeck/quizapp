@@ -8,6 +8,7 @@ const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
 
 high.textContent = 'High Score: ' + localStorage.getItem('High')
+end.classList.add('hidden')
 
 let score = 0
 let total = 0
