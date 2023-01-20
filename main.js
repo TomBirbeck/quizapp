@@ -7,13 +7,12 @@ const quizCategory = document.querySelector('.categories')
 const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
 
-end.classList.add('hidden')
-console.log(localStorage)
-
 let score = 0
 let total = 0
 let questionAmount = 0
 let cat = ''
+
+end.classList.add('hidden')
 
 const questions = async (cat) => {
     const res = await fetch(`https://the-trivia-api.com/api/questions?limit=1&categories=${cat}`, {
@@ -155,6 +154,7 @@ const endQuiz = () => {
 }
     next.classList.remove('hidden')
     end.classList.add('hidden')
+    highscore(cat)
 }
 
 end.addEventListener('click', endQuiz)
