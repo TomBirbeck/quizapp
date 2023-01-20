@@ -7,7 +7,6 @@ const quizCategory = document.querySelector('.categories')
 const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
 
-high.textContent = 'High Score: ' + localStorage.getItem('High')
 end.classList.add('hidden')
 
 let score = 0
@@ -90,6 +89,15 @@ quizCategory.addEventListener('change', handleCategory)
 //sets quiz length
 const handleQuizLength = (e) => {
     questionAmount = Number(e.target.value)
+    if (questionAmount === 10){
+        if (localStorage.getItem('HighTen') !== null){
+            high.textContent = 'High Score: ' + localStorage.getItem('HighTen')
+        }
+    } else if (questionAmount === 20){
+high.textContent = 'High Score: ' + localStorage.getItem('HighTwenty')
+    } else if (questionAmount === 30){
+high.textContent = 'High Score: ' + localStorage.getItem('HighThirty')
+    }
     return
 }
 
@@ -113,11 +121,28 @@ const nextQuestion = () => {
 next.addEventListener('click', nextQuestion)
 
 const endQuiz = () => {
-    if (score > localStorage.getItem('High')){
-        localStorage.setItem('High', score);
-        next.classList.remove('hidden')
-        end.classList.add('hidden')
+    if (questionAmount === 10){
+        if (score > localStorage.getItem('HighTen')){
+            localStorage.setItem('HighTen', score);
+            next.classList.remove('hidden')
+            end.classList.add('hidden')
+        }
+        else if (questionAmount === 20){
+            if (score > localStorage.getItem('HighTwenty')){
+                localStorage.setItem('HighTwenty', score);
+                next.classList.remove('hidden')
+                end.classList.add('hidden')
+        }
+        else if (questionAmount === 30){
+            if (score > localStorage.getItem('HighThirty')){
+                localStorage.setItem('HighThirty', score);
+                next.classList.remove('hidden')
+                end.classList.add('hidden')
+        }
     }
+
+    }
+}
     next.classList.remove('hidden')
     end.classList.add('hidden')
 }
