@@ -32,14 +32,20 @@ const highscore = (cat) => {
     if (questionAmount === 10){
         if (localStorage.getItem(`HighTen${cat}`) !== null){
             high.textContent = 'High Score: ' + localStorage.getItem(`HighTen${cat}`)
+        } else {
+            high.textContent = 'High Score: 0'
         }
     } else if (questionAmount === 20){
-        if (localStorage.getItem(`HighTwent${cat}`) !== null){
+        if (localStorage.getItem(`HighTwenty${cat}`) !== null){
         high.textContent = 'High Score: ' + localStorage.getItem(`HighTwenty${cat}`)
+        } else {
+            high.textContent = 'High Score: 0'
         }
             } else if (questionAmount === 30){
-                if (localStorage.getItem(`HighTen${cat}`) !== null){
+                if (localStorage.getItem(`HighThirty${cat}`) !== null){
         high.textContent = 'High Score: ' + localStorage.getItem(`HighThirty${cat}`)
+                } else {
+                    high.textContent = 'High Score: 0'
                 }
             }
 }
@@ -137,14 +143,14 @@ const endQuiz = () => {
             end.classList.add('hidden')
         }
         else if (questionAmount === 20){
-            if (score > localStorage.getItem('HighTwenty')){
-                localStorage.setItem('HighTwenty', score);
+            if (score > localStorage.getItem(`HighTwenty${cat}`)){
+                localStorage.setItem(`HighTwenty${cat}`, score);
                 next.classList.remove('hidden')
                 end.classList.add('hidden')
         }
         else if (questionAmount === 30){
-            if (score > localStorage.getItem('HighThirty')){
-                localStorage.setItem('HighThirty', score);
+            if (score > localStorage.getItem(`HighThirty${cat}`)){
+                localStorage.setItem(`HighThirty${cat}`, score);
                 next.classList.remove('hidden')
                 end.classList.add('hidden')
         }
