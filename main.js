@@ -8,6 +8,7 @@ const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
 
 end.classList.add('hidden')
+console.log(localStorage)
 
 let score = 0
 let total = 0
@@ -25,6 +26,23 @@ const questions = async (cat) => {
  answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
  total++
  return data
+}
+
+//checks for high score based on quiz lenght and category
+const highscore = (cat) => {
+    if (questionAmount === 10){
+        if (localStorage.getItem(`HighTen${cat}`) !== null){
+            high.textContent = 'High Score: ' + localStorage.getItem(`HighTen${cat}`)
+        }
+    } else if (questionAmount === 20){
+        if (localStorage.getItem(`HighTwent${cat}`) !== null){
+        high.textContent = 'High Score: ' + localStorage.getItem(`HighTwenty${cat}`)
+        }
+            } else if (questionAmount === 30){
+                if (localStorage.getItem(`HighTen${cat}`) !== null){
+        high.textContent = 'High Score: ' + localStorage.getItem(`HighThirty${cat}`)
+                }
+            }
 }
 
 // takes in the answers, mixes them and creates buttons for all choices 
@@ -81,6 +99,7 @@ const handleCategory = (e) => {
     total = 0
     scoreBoard.textContent = 'Score:' + score
     cat = e.target.value
+    highscore(cat)
     questions(cat)
 }
 
@@ -89,15 +108,6 @@ quizCategory.addEventListener('change', handleCategory)
 //sets quiz length
 const handleQuizLength = (e) => {
     questionAmount = Number(e.target.value)
-    if (questionAmount === 10){
-        if (localStorage.getItem('HighTen') !== null){
-            high.textContent = 'High Score: ' + localStorage.getItem('HighTen')
-        }
-    } else if (questionAmount === 20){
-high.textContent = 'High Score: ' + localStorage.getItem('HighTwenty')
-    } else if (questionAmount === 30){
-high.textContent = 'High Score: ' + localStorage.getItem('HighThirty')
-    }
     return
 }
 
@@ -122,8 +132,8 @@ next.addEventListener('click', nextQuestion)
 
 const endQuiz = () => {
     if (questionAmount === 10){
-        if (score > localStorage.getItem('HighTen')){
-            localStorage.setItem('HighTen', score);
+        if (score > localStorage.getItem(`HighTen${cat}`)){
+            localStorage.setItem(`HighTen${cat}`, score);
             next.classList.remove('hidden')
             end.classList.add('hidden')
         }
