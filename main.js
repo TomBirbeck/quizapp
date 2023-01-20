@@ -11,21 +11,26 @@ let score = 0
 let total = 0
 let questionAmount = 0
 let cat = ''
+let questionList;
 
 end.classList.add('hidden')
 
-const questions = async (cat) => {
-    const res = await fetch(`https://the-trivia-api.com/api/questions?limit=1&categories=${cat}`, {
+const questions = async (length, cat) => {
+    const res = await fetch(`https://the-trivia-api.com/api/questions?limit=${length}&categories=${cat}`, {
    headers: {
      'Content-Type': 'application/json'
    },
  })
  const data  = await res.json()
- question.textContent = data[0].question
- answerMixer(data[0].correctAnswer, data[0].incorrectAnswers[0], data[0].incorrectAnswers[1], data[0].incorrectAnswers[2]);
- total++
  return data
 }
+
+const questionCycle = () => {
+    question.textContent = questionList[total].question
+    answerMixer(questionList[total].correctAnswer, questionList[total].incorrectAnswers[0], questionList[total].incorrectAnswers[1], questionList[total].incorrectAnswers[2]);
+    total++
+}
+
 
 //checks for high score based on quiz lenght and category
 const highscore = (cat) => {
@@ -61,6 +66,7 @@ const answerMixer = (correctAnswer, incorrectOne, incorrectTwo, incorrectThree) 
         if (e.target.textContent === correctAnswer){
             e.target.classList.add("correct");
             score++
+            scoreBoard.textContent = 'Score: ' + score
             for(let i = 0; i < buttons.length; i++){
                 buttons[i].setAttribute('disabled', '')
             }
@@ -96,16 +102,17 @@ mixed.map(answer => {
 }
 
 //sets category and starts quiz
-const handleCategory = (e) => {
+const handleCategory = async (e) => {
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
     score = 0
     total = 0
-    scoreBoard.textContent = 'Score:' + score
+    scoreBoard.textContent = 'Score: ' + score
     cat = e.target.value
     highscore(cat)
-    questions(cat)
+    questionList = await questions(questionAmount, cat)
+    questionCycle()
 }
 
 quizCategory.addEventListener('change', handleCategory)
@@ -124,8 +131,9 @@ const nextQuestion = () => {
         options.removeChild(options.firstChild);
     }
     if (total < questionAmount){
-        questions(cat)
-        scoreBoard.textContent = 'Score: ' + score
+        // questions(cat)
+        questionCycle()
+        // scoreBoard.textContent = 'Score: ' + score
     } else if (total === questionAmount) {
         question.textContent = 'Well done! You scored ' + score + ' out of ' + total
         next.classList.add('hidden')
