@@ -79,6 +79,7 @@ body {
     width: 100%;
     text-align: center;
     font-size: 1.8rem;
+    margin-top: 0.3rem;
 }
 
 .options {
@@ -185,9 +186,11 @@ body {
 @media only screen and (max-width: 600px) {
     .categories {
         min-width: 50vw;
+        font-size: 1rem;
     }
     .quizLength {
         width: 50vw;
+        font-size: 1rem;
     }
     .highScore {
         font-size: 0.8rem;
