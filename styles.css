@@ -7,8 +7,6 @@ body {
     margin: 0;
     padding: 0;
     background-color: #475569;
-    /* background-color: black;
-    color: red; */
 }
 
 .topSection {
@@ -121,6 +119,12 @@ body {
     border-radius: 0.5rem;
 }
 
+.questionNo {
+    display: grid;
+    place-self: end;
+    font-size: 1.2rem;
+}
+
 .footer {
     text-align: center;
     color: white;
@@ -155,6 +159,9 @@ body {
     .button {
         padding: 0.3rem;
         font-size: 0.8rem;
+    }
+    .questionNo {
+        font-size: 1rem;
     }
 }
 @media only screen and (max-width: 1000px) {

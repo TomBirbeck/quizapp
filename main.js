@@ -7,6 +7,7 @@ const quizCategory = document.querySelector('.categories')
 const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
 const restart = document.querySelector('.restartQuiz')
+const questionNumber = document.querySelector('.questionNo')
 
 let score = 0
 let total = 0
@@ -28,6 +29,7 @@ const questionCycle = () => {
     question.textContent = questionList[total].question
     answerMixer(questionList[total].correctAnswer, questionList[total].incorrectAnswers[0], questionList[total].incorrectAnswers[1], questionList[total].incorrectAnswers[2]);
     total++
+    questionNumber.textContent = `Question: ${total}`
 }
 
 
@@ -114,6 +116,7 @@ const handleCategory = async (e) => {
     highscore(cat)
     questionList = await questions(questionAmount, cat)
     questionCycle()
+    questionNumber.classList.remove('hidden')
 }
 
 quizCategory.addEventListener('change', handleCategory)
@@ -140,6 +143,7 @@ const nextQuestion = () => {
         question.textContent = 'Well done! You scored ' + score + ' out of ' + total
         next.classList.add('hidden')
         end.classList.remove('hidden')
+        questionNumber.classList.add('hidden')
     }
 }
 
@@ -170,6 +174,7 @@ const endQuiz = () => {
 }
     restart.classList.remove('hidden')
     end.classList.add('hidden')
+    questionNumber.classList.add('hidden')
     highscore(cat)
 }
 
