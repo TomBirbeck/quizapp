@@ -114,6 +114,13 @@ body {
     border-radius: 0.5rem;
 }
 
+.restartQuiz{
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+
 .footer {
     text-align: center;
     color: white;
@@ -201,6 +208,10 @@ body {
     }
     .endQuiz {
         padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+    .restartQuiz{
+        padding:0.3rem;
         font-size: 0.8rem;
     }
 }

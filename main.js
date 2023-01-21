@@ -6,14 +6,13 @@ const next = document.querySelector('.nextQuestion')
 const quizCategory = document.querySelector('.categories')
 const quizLength = document.querySelector('.quizLength')
 const end = document.querySelector('.endQuiz')
+const restart = document.querySelector('.restartQuiz')
 
 let score = 0
 let total = 0
 let questionAmount = 0
 let cat = ''
 let questionList;
-
-end.classList.add('hidden')
 
 const questions = async (length, cat) => {
     const res = await fetch(`https://the-trivia-api.com/api/questions?limit=${length}&categories=${cat}`, {
@@ -106,6 +105,8 @@ const handleCategory = async (e) => {
     while (options.firstChild) {
         options.removeChild(options.firstChild);
     }
+    restart.classList.add('hidden')
+    next.classList.remove('hidden')
     score = 0
     total = 0
     scoreBoard.textContent = 'Score: ' + score
@@ -116,6 +117,7 @@ const handleCategory = async (e) => {
 }
 
 quizCategory.addEventListener('change', handleCategory)
+restart.addEventListener('click', handleCategory)
 
 //sets quiz length
 const handleQuizLength = (e) => {
@@ -147,7 +149,7 @@ const endQuiz = () => {
     if (questionAmount === 10){
         if (score > localStorage.getItem(`HighTen${cat}`)){
             localStorage.setItem(`HighTen${cat}`, score);
-            next.classList.remove('hidden')
+            restart.classList.remove('hidden')
             end.classList.add('hidden')
         }
         else if (questionAmount === 20){
@@ -159,14 +161,14 @@ const endQuiz = () => {
         else if (questionAmount === 30){
             if (score > localStorage.getItem(`HighThirty${cat}`)){
                 localStorage.setItem(`HighThirty${cat}`, score);
-                next.classList.remove('hidden')
+                restart.classList.remove('hidden')
                 end.classList.add('hidden')
         }
     }
 
     }
 }
-    next.classList.remove('hidden')
+    restart.classList.remove('hidden')
     end.classList.add('hidden')
     highscore(cat)
 }
