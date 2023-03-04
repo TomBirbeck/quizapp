@@ -97,6 +97,7 @@ body {
     border: 2px solid black;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
+    transition: 0.5s ease-in-out;
 }
 
 .nextQuestion{
@@ -228,4 +229,5 @@ body {
 
 .buttonsHover :hover{
     scale: 1.1;
+    background-color:  rgba(251, 191, 36, 0.9);
 }
