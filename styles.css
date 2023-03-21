@@ -231,3 +231,8 @@ body {
     scale: 1.1;
     background-color:  rgba(251, 191, 36, 0.9);
 }
+
+.correct:hover {
+    scale: 1.1;
+    background-color: #059669;
+}
